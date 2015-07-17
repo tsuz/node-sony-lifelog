@@ -1,0 +1,27 @@
+{
+  "name": "node-sony-lifelog",
+  "version": "1.0.0",
+  "description": "Sony Lifelog API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tak215/node-sony-lifelog.git"
+  },
+  "keywords": [
+    "Sony",
+    "Lifelog"
+  ],
+  "author": "Taku Suzuki <tak215@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tak215/node-sony-lifelog/issues"
+  },
+  "homepage": "https://github.com/tak215/node-sony-lifelog",
+  "dependencies": {
+    "bluebird": "^2.9.34",
+    "request": "^2.58.0"
+  }
+}
