@@ -2,14 +2,49 @@
 
 /**
  * Sony Lifelog API
- * @type {{}}
+ * Usage:
+ *
+ *      var lifelog = require('sony-lifelog');
+ *
+ *      // If you have access token,
+ *      var app = lifelog.app({ token: 'token-bla' })
+ *      app.users()
+ *          .then(function(results){
+ *              // do something with results
+ *          }, function(reason){
+ *              // error reason
+ *          });
+ *
+ *      // If you don't have access token,
+ *
+ *      var auth = lifelog.auth({
+ *          client_id: 'bla_key',
+ *          secret: 'bla_key',
+ *          scope: 'lifelog.profile.read+lifelog.activities.read+lifelog.locations.read'
+ *      });
+ *      var url = auth.getRedirectURL();
+ *          // send user to url
+ *
+ *          // after callback operation...
+ *          auth.getAccessToken(code)
+ *              .then(function(results){
+ *                  // do something with results
+ *                  var accessToken = results.access_token;
+ *
+ *                  var app = lifelog.app({token: accessToken});
+ *                  app.users()
+ *                      .then(function(results){
+ *                          // got this users result
+ *                      }, function(reason){
+ *                         // error reason
+ *                      });
+ *              }, function(reason){
+ *                  // error reason
+ *              });
+ *
+ *
  */
 
-/** Whether an object is strictly an array */
-var isArray = require('util').isArray;
-
-/** Request Module **/
-var request = require('request');
 
 /** Application Side **/
 var appObj = require('./application');
