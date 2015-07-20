@@ -1,5 +1,8 @@
 
 
+# Description
+This is a Sony Lifelog API Client Wrapper
+
 # Installation
 ```sh
 $ npm install node-sony-lifelog
@@ -8,7 +11,8 @@ $ npm install node-sony-lifelog
 # Usage
 
 ### Application
-```
+
+```javascript
 
 /** Access Token Retrieved from Login Credential Code **/
 var app = require('node-sony-lifelog').app(token);
@@ -28,7 +32,7 @@ app
 
 ### Authentication
 
-```
+```javascript
 
 var lifelog = require('node-sony-lifelog');
 
@@ -41,7 +45,17 @@ var auth = lifelog.auth({
 /** Redirect URL for Lifelog API Login **/
 var redirectURL = auth.redirectURL();
 
-/** Get Access Token from the Code Retrieved with Lifelog Callback **/
+/**
+ * > Redirect the user to redirectURL
+ * > User logs into their account through the URL
+ * > Lifelog server redirects user to a callback URL
+ * > Callback URL would look like this when success:
+ * >>> https://YOUR_CALLBACK_URL?code=someCode&state=yourUniqueIdentifier&scope=scopeFromAbove
+ * > Callback URL would look like this when fails:
+ * >>> https://YOUR_CALLBACK_URL?code=someCode&fault=...
+ **/
+
+/** insert object directly or input the code retrieved with Lifelog callback **/
 var token = auth.getAccessToken(code);
 
 ```
@@ -52,7 +66,7 @@ var token = auth.getAccessToken(code);
 ### User
 * [User API Reference]
 
-```
+```javascript
 
 
 // get user info
@@ -70,7 +84,7 @@ app.user();  // GET /v1/users/me
 > **end_time** Timestamp Ex: '2014-06-01T19:00:00.000Z'
 > **limit** Integer maximum number of entries
 
-```
+```javascript
 
 
 // get all activities
@@ -165,6 +179,21 @@ app.locations.single({ id: locationId }); // GET /v1/users/me/locations/:id
 ```
 
 
+# Test
+
+```
+
+ // TODO
+
+```
+
+# Development
+
+```
+
+// TODO
+
+```
 
 [User API Reference]:https://developer.sony.com/develop/services/lifelog-api/endpoints/user-profile/
 [Activities API Reference]:https://developer.sony.com/develop/services/lifelog-api/endpoints/activities/
