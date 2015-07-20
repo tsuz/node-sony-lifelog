@@ -82,7 +82,7 @@ var Auth = function (obj){
                 headers: {'content-type' : 'application/x-www-form-urlencoded'},
                 url:     'https://platform.lifelog.sonymobile.com/oauth/2/token',
                 body:    body
-            });
+            }, true);
         },
         refreshToken: function(refreshToken){
             if(!refreshToken) throw "refreshToken parameter is undefined";
@@ -97,7 +97,7 @@ var Auth = function (obj){
                 headers: {'content-type' : 'application/x-www-form-urlencoded'},
                 url:     'https://platform.lifelog.sonymobile.com/oauth/2/token',
                 body:    body
-            });
+            }, true);
         }
     }
 };
