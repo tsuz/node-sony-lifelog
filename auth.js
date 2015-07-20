@@ -40,15 +40,36 @@ var Auth = function (obj){
          * Get Redirect URL
          * @param code Unique Identifier used for callbacks
          */
-        redirectURL: function(){
+        redirectURL: function(state){
+            if(state){
+                return 'https://platform.lifelog.sonymobile.com/oauth/2/authorize?client_id='+client_id+'&scope='+scope+'&state='+state;
+            }
             return 'https://platform.lifelog.sonymobile.com/oauth/2/authorize?client_id='+client_id+'&scope='+scope;
         },
         /**
          * Get Access Token from Code Retrieved in the Callback
-         * @param code
+         * @param mixed String:code or Object:Object returned from the callback
+         * Ex:
+         *      'ma7cbM9d'
+         *      or
+         *      {
+         *          "scope": "lifelog.profile.read lifelog.activities.read lifelog.locations.read",
+         *          "state": "null",
+         *          "code": "ma7cbM9d"
+         *      }
+         *
          * @returns obj Authorization Code Response
          */
-        getAccessToken: function(code){
+        getAccessToken: function(obj){
+            var code;
+            if(typeof obj === 'string'){ // assume it's a code
+                code = obj;
+            } else if(typeof obj === 'object'){
+                code = obj.code;
+            } else{
+                throw "Null parameter in Auth.getAccessToken(). It must be a code or a returned object from Lifelog callback";
+            }
+
             if(!code) throw "'The authorization code you received in response to your authenticate request' is null";
 
             var body =
