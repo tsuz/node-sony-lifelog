@@ -25,6 +25,7 @@ var Application = function(obj){
         user: _user,
         activitiesAll: _activities,
         activities: {
+            applicationAll: _activities_application,
             application: {
                 album: _activities_application_camera,
                 books: _activities_application_books,
@@ -96,6 +97,17 @@ var Application = function(obj){
     function _activities_application_browsing(params){
         var url = QueryBuilder.build('application:browsing', params);
         
+        return caller.makeRequest(url);
+    }
+
+    /**
+     * Activities -> All
+     * @param params
+     * @private
+     */
+    function _activities_application(params){
+        var url = QueryBuilder.build('application', params);
+
         return caller.makeRequest(url);
     }
 
