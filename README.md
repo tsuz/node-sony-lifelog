@@ -78,11 +78,16 @@ app.user();  // GET /v1/users/me
 ### Activities
 * [Activities API Reference]
 
-
+>
 > *Suggested but not required parameters for activities:*
+>
+>
 > **start_time** Timestamp Ex: '2014-06-01T09:00:00.000Z'
+>
 > **end_time** Timestamp Ex: '2014-06-01T19:00:00.000Z'
+>
 > **limit** Integer maximum number of entries
+>
 
 ```javascript
 
@@ -156,12 +161,16 @@ app.activities.transport() // GET /v1/users/me/activities?type=transport
 ### Locations
 * [Locations API Reference]
 
-
-> *Suggested but not required parameters for locations:*
+>
+> *Suggested but not required parameters for activities:*
+>
+>
 > **start_time** Timestamp Ex: '2014-06-01T09:00:00.000Z'
+>
 > **end_time** Timestamp Ex: '2014-06-01T19:00:00.000Z'
+>
 > **limit** Integer maximum number of entries
-
+>
 
 
 ```
