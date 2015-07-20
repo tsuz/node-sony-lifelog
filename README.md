@@ -43,14 +43,14 @@ var auth = lifelog.auth({
 });
 
 /** Redirect URL for Lifelog API Login **/
-var redirectURL = auth.redirectURL();
+var redirectURL = auth.redirectURL(uniqueIdentifier);
 
 /**
  * > Redirect the user to redirectURL
  * > User logs into their account through the URL
  * > Lifelog server redirects user to a callback URL
  * > Callback URL would look like this when success:
- * >>> https://YOUR_CALLBACK_URL?code=someCode&state=yourUniqueIdentifier&scope=scopeFromAbove
+ * >>> https://YOUR_CALLBACK_URL?code=someCode&state=uniqueIdentifier&scope=scopeFromAbove
  * > Callback URL would look like this when fails:
  * >>> https://YOUR_CALLBACK_URL?code=someCode&fault=...
  **/
