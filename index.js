@@ -63,7 +63,7 @@ var SonyLifelog =  {
     },
     auth: function(obj){
         /** Validate Auth Object **/
-        if(obj.client_id && obj.scope && obj.client_secret){
+        if(obj.client_id || obj.scope || obj.client_secret){
             return authObj(obj);
         }
         return null;
