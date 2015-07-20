@@ -54,10 +54,10 @@ var authObj = require('./auth');
 
 var SonyLifelog =  {
 
-    app: function(obj){
+    app: function(token){
         /** Application Object **/
-        if(obj.token){
-            return appObj(obj);
+        if(token){
+            return appObj(token);
         }
         return null;
     },
@@ -69,6 +69,5 @@ var SonyLifelog =  {
         return null;
     }
 };
-
 
 module.exports = SonyLifelog;

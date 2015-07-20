@@ -59,55 +59,81 @@ var rejectHandler = function(err){
     };
 };
 
+
+
+
+/** Options for HTTPS Request **/
+var options = {};
+
+options.headers = {
+    'Accept': 'application/json',
+    'Accept-Encoding': 'gzip',
+    'Content-Encoding': 'gzip'
+};
+
 /**
  * Make Request
  * @param options
  * @returns {bluebird}
  */
-var Caller = function(token){
+var Caller = {};
 
-    /** Options for HTTPS Request **/
-    var options = {};
 
-    options.headers = {
-        'Authorization' : 'Bearer ' + token,
-        'Accept': 'application/json',
-        'Accept-Encoding': 'gzip',
-        'Content-Encoding': 'gzip'
-    };
+ Caller.makeRequest = function(url, token, parseJSON){
 
-    return {
-        makeRequest: function(url){
-            return url;
-            return new Promise(function (resolve, reject) {
-                options.url = url;
-                request(options, function(err, response, body){
-                    if(err){
-                        rejectHandler(err);
-                    }
-                    else{
+     /** Set options **/
+     options.headers['Authorization'] = 'Bearer ' + token;
+     options.url = url;
+
+     return new Promise(function (resolve, reject) {
+        request(options, function(err, response, body){
+            if(err){
+                rejectHandler(err);
+            }
+            else{
+                if (parseJSON) {
+                    try {
+                        body = JSON.parse(body);
+                        resolve(body);
+                    } catch(err){
                         resolve(body);
                     }
-                });
-
-            });
-        },
-        makePostRequest: function(customObj){
-            return new Promise(function (resolve, reject) {
-                request.post(customObj, function(err, response, body){
-                    if(err){
-                        rejectHandler(err);
-                    }
-                    else{
-                        resolve(body);
-                    }
-                });
-
-            });
-        }
-    }
-
+                } else {
+                    resolve(body);
+                }
+            }
+        });
+     });
 };
+
+/**
+ * Make Post Request
+ * @param customObj
+ * @returns {bluebird}
+ */
+Caller.makePostRequest = function(customObj, parseJSON){
+    return new Promise(function (resolve, reject) {
+        request.post(customObj, function(err, response, body){
+            if(err){
+                rejectHandler(err);
+            }
+            else{
+                if(parseJSON){
+                    try{
+                        body = JSON.parse(body);
+                        resolve(body);
+                    } catch(err){
+                        resolve(body);
+                    }
+                } else {
+                    resolve(body);
+                }
+            }
+        });
+
+    });
+};
+
 
 
 module.exports = Caller;

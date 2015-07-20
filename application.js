@@ -6,22 +6,18 @@
  */
 var QueryBuilder = require('./query-builder');
 
+/** Request Maker **/
+var caller = require('./caller');
 
-var Application = function(obj){
+var Application = function(token){
 
-    if(!obj.token){
+    if(!token){
         throw "Paramter token is null";
     }
 
-    var App = {};
+    var _token = token;
 
-    /** Access Token **/
-    var token = obj.token;
-
-    /** This makes request to the server **/
-    var caller = require('./caller')(token);
-
-    App = {
+    var App = {
         user: _user,
         activitiesAll: _activities,
         activities: {
@@ -65,7 +61,7 @@ var Application = function(obj){
     function _user(){
         var url = QueryBuilder.build();
 
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -75,7 +71,7 @@ var Application = function(obj){
     function _activities(params){
         var url = QueryBuilder.build('activities', params);
 
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 
@@ -86,7 +82,7 @@ var Application = function(obj){
     function _activities_application_books(params){
         var url = QueryBuilder.build('application:books', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -97,7 +93,7 @@ var Application = function(obj){
     function _activities_application_browsing(params){
         var url = QueryBuilder.build('application:browsing', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -108,7 +104,7 @@ var Application = function(obj){
     function _activities_application(params){
         var url = QueryBuilder.build('application', params);
 
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -119,7 +115,7 @@ var Application = function(obj){
     function _activities_application_camera(params){
         var url = QueryBuilder.build('application:camera', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -130,7 +126,7 @@ var Application = function(obj){
     function _activities_application_communication(params){
         var url = QueryBuilder.build('application:communication', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -141,7 +137,7 @@ var Application = function(obj){
     function _activities_application_game(params){
         var url = QueryBuilder.build('application:game', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -152,7 +148,7 @@ var Application = function(obj){
     function _activities_application_movie(params){
 
         var url = QueryBuilder.build('application:movie', params);
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -163,7 +159,7 @@ var Application = function(obj){
     function _activities_application_music(params){
         var url = QueryBuilder.build('application:music', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 
@@ -175,7 +171,7 @@ var Application = function(obj){
     function _activities_application_other(params){
         var url = QueryBuilder.build('application:other', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -188,7 +184,7 @@ var Application = function(obj){
         params.type = 'camera';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -201,7 +197,7 @@ var Application = function(obj){
         params.type = 'music';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 
@@ -215,7 +211,7 @@ var Application = function(obj){
         params.type = 'physical';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
      /**
@@ -228,7 +224,7 @@ var Application = function(obj){
         params.type = 'physical:walk';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 
@@ -242,7 +238,7 @@ var Application = function(obj){
         params.type = 'physical:run';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
      /**
@@ -255,7 +251,7 @@ var Application = function(obj){
         params.type = 'physical:bicycle';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
      /**
      * Activities -> Physical -> Other
@@ -267,7 +263,7 @@ var Application = function(obj){
         params.type = 'physical:other';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 
@@ -281,7 +277,7 @@ var Application = function(obj){
         params.type = 'sleep';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -294,7 +290,7 @@ var Application = function(obj){
         params.type = 'transport';
         var url = QueryBuilder.build('activities', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 
@@ -309,7 +305,7 @@ var Application = function(obj){
         if(!params.id) throw "To call 'Single Location', id parameter must be declared in the parameter object";
         var url = QueryBuilder.build('location', params.id);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
     /**
@@ -322,7 +318,7 @@ var Application = function(obj){
         params.type = 'transport';
         var url = QueryBuilder.build('locations', params);
         
-        return caller.makeRequest(url);
+        return caller.makeRequest(url, _token, true);
     }
 
 };
