@@ -1,6 +1,6 @@
 {
   "name": "node-sony-lifelog",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "Sony Lifelog API",
   "main": "index.js",
   "scripts": {

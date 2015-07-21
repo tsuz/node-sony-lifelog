@@ -95,7 +95,7 @@ var Auth = function (obj){
 
             return caller.makePostRequest({
                 headers: {'content-type' : 'application/x-www-form-urlencoded'},
-                url:     'https://platform.lifelog.sonymobile.com/oauth/2/token',
+                url:     'https://platform.lifelog.sonymobile.com/oauth/2/refresh_token',
                 body:    body
             }, true);
         }
