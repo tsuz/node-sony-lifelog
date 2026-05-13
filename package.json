@@ -14,7 +14,7 @@
     "Sony",
     "Lifelog"
   ],
-  "author": "Taku Suzuki <tak215@gmail.com>",
+  "author": "Taku Suzuki",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tak215/node-sony-lifelog/issues"
